@@ -1,0 +1,20 @@
+1.安装必要的编译软件包: 
+	sudo yum install gcc gcc-c++
+
+2.从源码下载Nodejs: 
+	wget https://npm.taobao.org/mirrors/node/v10.13.0/node-v10.13.0.tar.gz
+	tar xvf node-v10.13.0.tar.gz
+	
+3.进入解压的 node 文件夹，开始编译:
+	cd node-v10.13.0/
+	./configure
+	make
+	
+4.安装Nodejs:
+	sudo make install
+	
+	
+	
+	
+	
+	python init.py --discovery 127.0.0.1:2181 --database cmdb --redis_ip 127.0.0.1 --redis_port 6379 --redis_pass admin --mongo_ip 127.0.0.1 --mongo_port 27017 --mongo_user admin --mongo_pass admin --blueking_cmdb_url http://172.20.177.197:8085 --listen_port 8085

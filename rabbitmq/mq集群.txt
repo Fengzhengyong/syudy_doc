@@ -1,0 +1,163 @@
+rabbitmq安装配置  
+安装需要 socat  erlang rabbitmq
+https://www.cnblogs.com/sellsa/p/8056173.html  
+https://www.cnblogs.com/chrischennx/p/7071471.html
+https://packagecloud.io/rabbitmq/erlang
+集群配置(节点可以是disk节点或RAM节点)
+1、绑定hosts文件
+192.168.88.1 rabbit1
+192.168.88.2 rabbit2
+192.168.88.3 rabbit3
+
+2、设置节点互相验证：Erlang Cookie
+RabbitMQ节点和CLI工具（例如rabbitmqctl）使用cookie来确定它们是否被允许相互通信，要使两个节点能够通信，它们必须具有相同的共享密钥，称为Erlang Cookie.
+Cookie只是一个字符串，最多可以有255个字符。它通常存储在本地文件中。该文件必须只能由所有者访问（400权限）。每个集群节点必须具有相同的 cookie，文件位置/var/lib/rabbitmq/.erlang.cookie， 把rabbit2、rabbit3设置成和rabbit2一样的即可，权限是400
+
+3、正常方式启动所有节点(默认端口5672)
+rabbitmq-server -detached 
+rabbitmq-server -detached
+rabbitmq-server -detached
+启动管理控制台rabbitmq-plugins enable rabbitmq_management （默认端口15672）
+
+4、查看集群状态
+rabbitmqctl cluster_status
+
+5、为了连接集群中的三个节点，我们把rabbit@c2和rabbit@c3节点加入到rabbit@c1节点集群
+首先，在rabbit@c1的簇中加入rabbit@c2
+　　A、停止rabbir@c2的rabbitmq应用程序，
+　　B、加入rabbit@c1集群
+　　C、然后启动RabbitMQ程序
+[root@rabbit2 ~]# rabbitmqctl stop_app
+Stopping rabbit application on node rabbit@rabbit2 ...
+ 
+[root@rabbit2 ~]# rabbitmqctl join_cluster rabbit@rabbit1
+Clustering node rabbit@rabbit2 with rabbit@rabbit1
+ 
+[root@rabbit2 ~]# rabbitmqctl start_app
+Starting node rabbit@rabbit2 ...
+ completed with 0 plugins.
+
+现在我们在rabbit1、rabbit2任意一个节点上查看集群状态，我们可以看到这两个节点加入了一个集群
+[root@rabbit1 ~]# rabbitmqctl cluster_status
+Cluster status of node rabbit@rabbit1 ...
+[{nodes,[{disc,[rabbit@rabbit1,rabbit@rabbit2]}]},
+ {running_nodes,[rabbit@rabbit2,rabbit@rabbit1]},
+ {cluster_name,<<"rabbit@rabbit1">>},
+ {partitions,[]},
+ {alarms,[{rabbit@rabbit2,[]},{rabbit@rabbit1,[]}]}]
+
+5、集群移除节点
+当节点不再是节点的一部分时，需要从集群中明确地删除节点。我们首先从集群中删除rabbit@rabbit3，并将其返回到独立操作
+在rabbit@rabbit3上：
+       1、我们停止RabbitMQ应用程序，
+　　2、重置节点
+　　3、重新启动RabbitMQ应用程序
+[root@rabbit3 ~]# rabbitmqctl stop_app
+Stopping rabbit application on node rabbit@rabbit3 ...
+ 
+[root@rabbit3 ~]# rabbitmqctl reset
+Resetting node rabbit@rabbit3 ...
+ 
+[root@rabbit3 ~]# rabbitmqctl start_app
+Starting node rabbit@rabbit3 ...
+ completed with 0 plugins.
+
+我们也可以远程删除节点，例如，在处理无响应的节点时，这很有用
+比如：我们在节点rabbit@rabbit2上把rabbit@rabbit1从集群中移除
+rabbitmqctl stop_app
+rabbitmqctl forget_cluster_node rabbit@rabbit1
+请注意，rabbit1仍然认为它与rabbit2集群 ，并试图启动它将导致错误。我们需要重新设置才能重新启动。
+ rabbitmqctl reset     #必须要重置
+rabbitmqctl start_app
+
+
+从客户端连接到群集
+客户端可以正常连接到群集中的任何节点。如果该节点出现故障，并且集群的其余部分仍然存在，那么客户端应该注意到已关闭的连接，并且应该能够重新连接到群集的一些幸存的成员。通常，将节点主机名或IP地址烧入客户端应用程序是不可取的：这会引入不灵活性，并且如果集群配置发生更改或集群中节点数发生更改，则需要编辑，重新编译和重新部署客户端应用程序。相反，我们推荐一个更抽象的方法：这可能是一个动态的DNS服务，它具有非常短的TTL配置，或者一个普通的TCP负载均衡器，或者用起搏器或类似技术实现的某种移动IP
+具有RAM节点的集群
+RAM节点只将其元数据保存在内存中。由于RAM节点不必像光盘节点那样写入光盘，它们可以更好地执行。但是请注意，由于永久队列数据总是存储在磁盘上，因此性能改进将仅影响资源管理（例如添加/删除队列，交换或虚拟主机），但不会影响发布速度或消耗速度
+RAM节点是高级用例; 设置你的第一个群集时，你应该不使用它们。您应该有足够的光盘节点来处理您的冗余要求，然后在需要时添加额外的RAM节点进行缩放
+只包含RAM节点的集群是脆弱的; 如果群集停止，您将无法再次启动， 并将丢失所有数据。RabbitMQ将阻止在许多情况下创建RAM节点的群集，但是它不能完全阻止它
+
+这里的例子仅仅为了简单起见，显示了具有一个光盘和一个RAM节点的集群; 这样的集群是一个糟糕的设计选择
+
+创建RAM节点
+我们可以在首次加入集群时将节点声明为RAM节点。像之前一样，我们使用rabbitmqctl join_cluster来完成此 操作，但传递 --ram标志
+
+rabbit2$ rabbitmqctl stop_app
+Stopping node rabbit@rabbit2 ...done
+.
+rabbit2$ rabbitmqctl join_cluster --ram rabbit@rabbit1
+Clustering node rabbit@rabbit2 with [rabbit@rabbit1] ...done.
+rabbit2$ rabbitmqctl start_app
+Starting node rabbit@rabbit2 ...done.
+ 
+RAM节点在集群状态中显示为：
+rabbit1$ rabbitmqctl cluster_status
+Cluster status of node rabbit@rabbit1 ...
+[{nodes,[{disc,[rabbit@rabbit1]},{ram,[rabbit@rabbit2]}]},
+ {running_nodes,[rabbit@rabbit2,rabbit@rabbit1]}]
+...done.
+ 
+rabbit2$ rabbitmqctl cluster_status
+Cluster status of node rabbit@rabbit2 ...
+[{nodes,[{disc,[rabbit@rabbit1]},{ram,[rabbit@rabbit2]}]},
+ {running_nodes,[rabbit@rabbit1,rabbit@rabbit2]}]
+...done.
+
+更改节点类型
+我们可以将节点的类型从ram更改为disc，反之亦然。假设我们想要颠倒rabbit @ rabbit2和rabbit @ rabbit1的类型 ，将前者从ram节点转换为disc节点，将后者从disc节点转换为ram节点。要做到这一点，我们可以使用 change_cluster_node_type命令。该节点必须先停止
+
+rabbit2$ rabbitmqctl stop_app
+Stopping node rabbit@rabbit2 ...done.
+ 
+rabbit2$ rabbitmqctl change_cluster_node_type disc
+Turning rabbit@rabbit2 into a disc node ...
+...done.
+Starting node rabbit@rabbit2 ...done.
+ 
+rabbit1$ rabbitmqctl stop_app
+Stopping node rabbit@rabbit1 ...done.
+ 
+rabbit1$ rabbitmqctl change_cluster_node_type ram
+Turning rabbit@rabbit1 into a ram node ...
+ 
+rabbit1$ rabbitmqctl start_app
+Starting node rabbit@rabbit1 ...done.
+
+
+
+
+
+
+
+
+rabbitmq模式策略：
+1. 单一模式：非集群模式
+2. 默认的集群模式
+    对于Queue来说，消息实体只存在于其中一个节点，A、B两个节点仅有相同的元数据，即队列结构。
+当消息进入A节点的Queue中后，consumer从B节点拉取时，RabbitMQ会临时在A、B间进行消息传输，把A中的消息实体取出并经过B发送给consumer。
+所以consumer应尽量连接每一个节点，从中取消息。即对于同一个逻辑队列，要在多个节点建立物理Queue。否则无论consumer连A或B，出口总在A，会产生瓶颈。
+该模式存在一个问题就是当A节点故障后，B节点无法取到A节点中还未消费的消息实体。
+如果做了消息持久化，那么得等A节点恢复，然后才可被消费；如果没有持久化的话，然后就没有然后了
+
+
+ 3. 镜像模式：把需要的队列做成镜像队列，存在于多个节点上，属于RABBITMA集群
+该模式解决了上述问题，其实质和普通模式不同之处在于，消息实体会主动在镜像节点间同步，而不是在consumer取数据时临时拉取。
+该模式带来的副作用也很明显，除了降低系统性能外，如果镜像队列数量过多，加之大量的消息进入，集群内部的网络带宽将会被这种同步通讯大大消耗掉。
+所以在对可靠性要求较高的场合中适用
+
+
+在cluster中任意节点启用策略，策略会自动同步到集群节点 
+rabbitmqctl set_policy -p hrsystem ha-allqueue "^"  '{"ha-mode":"all"}'
+这行命令在vhost名称为hrsystem创建了一个策略，策略名称为ha-allqueue,策略模式为 all 即复制到所有节点，包含新增节点，策略正则表达式为 “^” 表示所有匹配所有队列名称。
+
+ha-mode：策略键
+1.all 队列镜像在群集中的所有节点上。当新节点添加到群集时，队列将镜像到该节点
+2.exactly 集群中的队列实例数。
+3.nodes 队列镜像到节点名称中列出的节点。
+
+ha-sync-mode：队列同步
+1.manual手动<默认模式>.新的队列镜像将不会收到现有的消息，它只会接收新的消息。
+2.automatic自动同步.当一个新镜像加入时，队列会自动同步。队列同步是一个阻塞操
+
+rabbitmqctl list_policies -p biz-v1.0-product

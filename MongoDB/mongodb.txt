@@ -1,0 +1,51 @@
+1. 下载地址：https://www.mongodb.com/download-center#community
+
+2.解压：tar -zxvf mongodb-linux-i686-2.8.0-rc1.tgz
+
+3.mkdir data
+	mkdir logs
+	mkdir etc
+	export PATH=/usr/myapp/mongodb/bin:$PATH
+	
+4.创建配置文件mongodb.conf
+
+cd /usr/local/mongodb/etc
+
+vim mongodb.conf
+
+dbpath=/usr/myapp/mongodb/data
+logpath=/usr/myapp/mongodb/logs/mongodb.log
+port=27017
+fork=true
+journal=false
+storageEngine=mmapv1
+
+5.启动：在mongodbserver 的 bin目录下：
+./mongod --config /usr/myapp/mongodb/etc/mongodb.conf
+
+6../mongod> use admin
+switched to db admin
+> db.createUser( {user: "admin",pwd: "admin",roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]});
+
+7.db.shutdownServer()
+	在配置文件中添加：auth=true , 然后启动：
+	> use admin
+	> db.auth("pfnieadmin","123456")   #认证，返回1表示成功
+	
+8.. 在/etc/profile文件中，添加 export PATH=$PATH:/usr/local/mongoDB/mongodbserver/bin
+	执行source /etc/profile，使系统环境变量立即生效
+	ln -s /usr/myapp/mongodb/bin/mongo  /usr/bin/mongo
+	
+9.回到任意路径下,执行mongo命令,连接mongod服务
+
+
+db.updateUser(
+ "admin",
+        {
+           roles : [
+                     {"role" : "userAdminAnyDatabase","db" : "admin"},
+                     {"role" : "dbOwner","db" : "admin"},
+                     {"role" : "clusterAdmin", "db": "admin"}
+                   ]
+        }
+ )

@@ -1,0 +1,65 @@
+1.解压到安装目录： tar -zxf redis-3.2.11.tar.gz
+2.cd redis-3.2.11.tar.gz
+	make
+	cd src & make install
+3.创建bin和redis.conf文件:
+	mkdir -p /usr/local/redis/bin
+	mkdir -p /usr/local/redis/ect
+4.移动文件：
+	mv /usr/myapp/redis-3.2.11/redis.conf /usr/local/redis/etc
+	cd /usr/myapp/redis-3.2.11/src
+	mv mkreleasdhdr.sh redis-benchmark redis-check-aof redis-check-dump redis-cli redis-server /usr/local/redis/bin
+5.启动：
+	a)首先编辑conf文件，将daemonize属性改为yes（表明需要在后台运行）
+
+	cd etc/
+	Vi redis.conf
+
+	b)再次启动redis服务，并指定启动服务配置文件
+
+	redis-server /usr/local/redis/etc/redis.conf
+6.vim /etc/init.d/redis
+	chmod +x /etc/init.d/redis
+
+	service redis start
+	service redis stop
+
+	chkconfig --add redis
+	
+7.修改profile文件：
+
+# vi /etc/profile
+
+在最后行添加:
+
+ 
+
+export PATH="$PATH:/usr/local/redis/bin"
+
+然后马上应用这个文件：
+
+# . /etc/profile
+
+配置下面的内核参数，否则Redis脚本在重启或停止redis时，将会报错，并且不能自动在停止服务前同步数据到磁盘上/etc/sysctl.conf加上 
+
+#vim /etc/sysctl.conf
+
+vm.overcommit_memory = 1 
+
+#sysctl -p 
+
+
+
+
+关于Redis中的分布式锁：
+	开源框架Redisson原理：
+	1.Redisson的在面对redis集群时，通过hash选择一台机器，并通过lua脚本实现加锁机制
+	2.加锁存在互斥原则，当客户端1进行了加锁后，若客户端2请求加锁，则需要判断锁结构中的客户端ID的hash是否是客户端2，若不是则客户端2取得加锁客户端的锁持续时间，并一直进行请求加锁
+	3.watch dog自动延期机制： 存在一个后台线程监听当前持有锁的客户端，如果客户端加的锁的生命周期已到，但并未释放锁，那么就会不断的延长锁key的生存时间（watch dog线程每隔10s进行一次检查）
+	4.可重入加锁机制： 当客户端1都已经持有了这把锁，并进行了可持续加锁，则会将锁的数据结构中的数量+1：
+		锁结构： lock{
+						8743c9c0-0795-4907-87fd-6c719a6b4586[锁的key]:1[客户端ID]”:1[锁数量],
+						}
+	5.释放锁机制： 当执行lock.unlock()时则表示释放锁，则会对数量-1，若数量等于0时，则会调用del lock命令，从Redis中删除这个锁，则其他客户端就可以进行加锁了。
+	6.Redis分布式锁的缺点:  redis cluster，或者是redis master-slave架构的主从异步复制导致的redis分布式锁的最大缺陷：在redis master实例宕机的时候，可能导致多个客户端同时完成加锁。
+		当C1在master加入了key锁，master会将key锁异步复制到slave，当master宕机时，slave成为新的master，C2对新的master加锁，而C1也认为自己加上锁，则会存在两个client对同一个分布式锁进行了加锁，会出现业务逻辑上的错误，导致出现脏数据等。

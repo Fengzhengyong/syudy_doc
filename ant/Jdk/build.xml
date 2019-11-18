@@ -1,0 +1,52 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<project name="create rt_debug.jar" default="makejar" basedir=".">
+ 
+    <!--  初始化任务  -->
+    <target name="init">
+        <tstamp/>
+        <property environment="env"/>
+        <property name="project.build" location="build"/>
+        <property name="project.src" location="${project.build}/src"/>
+        <property name="project.classes" location="${project.build}/classes"/>
+        <property name="project.dist" location="${project.build}/dist"/>
+        <property name="project.classesJarRoot" location = "rt" />
+        <property name="debuglevel" value="source,lines,vars" />
+        <path id="project.classpath">
+            <pathelement location = "${project.classesJarRoot}" />
+        </path>
+    </target>
+ 
+    <!--  删除任务 -->
+    <target name="clean" depends="init">
+        <delete dir="${project.build}" quiet="true"/>
+        <mkdir dir="${project.build}"/>
+    </target>
+ 
+   <!--  加压JAVA_HOME/src.zip -->
+    <target name="unpack" depends="init, clean">
+        <unzip src="${env.JAVA_HOME}/src.zip" dest="${project.src}"/>   
+    </target>
+ 
+    <!-- 通过javac重新编译源文件  -->
+    <target name="build" depends="unpack">
+        <mkdir dir="${project.classes}"/>
+        <javac srcdir="${project.src}" classpathref="project.classpath"
+            destdir="${project.classes}" debug="on" 
+            fork="true" memoryMaximumSize="512m" failonerror="false" nowarn = "true" debuglevel = "${debuglevel}">
+            <!-- talk to the hand troublesome libs -->
+            <exclude name="org/apache/xpath/domapi/XPath*.java"/>
+            <exclude name="com/sun/corba/se/internal/Interceptors/Thread*.java"/>    
+            <exclude name = "com\sun\java\swing\plaf\gtk\*.java" />
+        </javac>
+    </target>
+ 
+    <!--  打包编译好的class文件到rt_debug.jar中 -->
+    <target name="makejar" depends="build">
+        <mkdir dir="${project.dist}"/>
+        <copy file="${env.JAVA_HOME}/jre/lib/rt.jar" tofile="${project.dist}/rt_debug.jar"/>
+        <jar jarfile="${project.dist}/rt_debug.jar" update="true" compress="false">
+            <fileset dir="${project.classes}"/>
+        </jar>
+    </target>
+ 
+</project>

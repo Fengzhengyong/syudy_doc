@@ -1,0 +1,54 @@
+通过ruby 的gem install安装时，经常会遇到的错误 
+
+[root@localhost zlib]# gem install rails
+ERROR:  Loading command: install (LoadError)
+cannot load such file -- zlib
+ERROR:  While executing gem ... (NoMethodError)
+
+undefined method `invoke_with_build_args' for nil:NilClass
+
+
+解决方案：
+进入ruby源码文件夹 
+安装ruby自身提供的zlib包 
+cd ext/zlib
+ruby ./extconf.rb
+make && make install
+
+--with-openssl-include=/usr/local/ssl/include/ --with-openssl-lib=/usr/local/ssl/lib  
+
+也是一样的处理思路：
+#cd ext/openssl
+#ruby ./extconf.rb
+#make && make install
+
+
+
+
+ruby:
+
+tar -zxvf ruby-2.4.1.tar.gz
+./configure --with-openssl-include=/usr/local/openssl/include/ --with-openssl-lib=/usr/local/openssl/lib --with-zlib-dir=/kingdee/redis/zlib-1.2.11
+make && make install
+
+
+zlib:
+
+
+cd ext/zlib
+ruby ./extconf.rb
+make && make install
+
+
+openssl:
+
+tar -xzvf openssl-1.0.1s.tar.gz
+cd openssl-1.0.1s
+./config -fPIC --prefix=/usr/local/openssl enable-shared
+./config -t
+make && make install
+openssl version
+
+cd ../ruby-2.3.0
+cd ext/openssl
+ruby extconf.rb     ruby extconf.rb --with-openssl-include=/usr/local/openssl/include/ --with-openssl-lib=/usr/local/openssl/lib

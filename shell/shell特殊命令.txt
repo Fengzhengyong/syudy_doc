@@ -1,0 +1,31 @@
+
+1.propreties文件加载 ：     								. /kingdee/ip.properties 
+
+2.命令多重检测（变量嵌套变量取值）： 						eval echo '$'$host > /kingdee/hosts/$host
+
+																											if [ -f "/kingdee/ip.properties" ];then
+																													 . /kingdee/ip.properties 
+																													for host in ${HOST_ARRAY[@]};
+																													do
+																														eval echo '$'$host $host >> /etc/hosts
+																														eval echo '$'$host > /kingdee/hosts/$host
+																														
+																														dest=`eval echo '$'$host`
+																														echo $dest
+																													done
+																												fi
+
+3.ps -ef | grep rsync  查看rsync是否启动  
+	/usr/bin/rsync --daemon --config=/etc/rsyncd.conf  重启rsync
+	
+	
+4. 挂载共享目录： mount -t cifs -o username=share,password=share,rw,file_mode=0777,dir_mode=0777,uid=0,gid=0 //192.168.1.120/share /root/share
+   卸载共享： umount  root/share
+   查看共享占用：  fuser /root/share    然后kill后再umount
+   
+5.捕获异常
+
+ret=$?
+if [ $ret -ne 0 ]; then
+    echo "失败, 错误码: $ret"
+fi

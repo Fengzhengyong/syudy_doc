@@ -1,0 +1,26 @@
+1.解压到安装目录： tar -zxf zookeeper-3.4.1.tar.gz -C /usr/myapp  
+2.配置： cd /usr/myapp/zookeeper-3.4.1
+	mkdir data
+	mkdir logs
+3.在conf目录下新建zoo.cfg文件，写入以下内容保存：
+
+	tickTime=2000
+	dataDir=/usr/myapp/zookeeper-3.4.1/data
+	dataLogDir=/usr/myapp/zookeeper-3.4.1/logs
+	clientPort=2181
+4.命令： ./zkServer.sh start
+		./zkServer.sh stop
+		./zkServer.sh restart
+		./zkServer.sh status
+		
+		
+		
+		
+关于ZK中的分布式锁的实现：
+	https://juejin.im/post/5c01532ef265da61362232ed
+	1.开源框架Curator对于多客户端获取及释放zk分布式锁的整个流程及背后的原理
+	2.
+	3.原理总结：
+			其实如果有客户端C、客户端D等N个客户端争抢一个zk分布式锁，原理都是类似的。大家都是上来直接创建一个锁节点下的一个接一个的临时顺序节点如果自己不是第一个节点，
+		就对自己上一个节点加监听器只要上一个节点释放锁，自己就排到前面去了，相当于是一个排队机制。而且用临时顺序节点的另外一个用意就是，如果某个客户端创建临时顺序
+		节点之后，不小心自己宕机了也没关系，zk感知到那个客户端宕机，会自动删除对应的临时顺序节点，相当于自动释放锁，或者是自动取消自己的排队。

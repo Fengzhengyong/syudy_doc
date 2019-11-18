@@ -1,0 +1,11 @@
+Centos7 
+
+1.wget -c https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz
+
+2.tar -zxvf go1.8.3.linux-amd64.tar.gz
+
+3.vim /etc/profile
+	export GOROOT=/usr/myapp/go
+	export PATH=$PATH:$GOROOT/bin
+	export GOPATH=/go/goApp
+source /etc/profile

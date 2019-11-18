@@ -1,0 +1,5 @@
+
+1. 选择 /etc/rc.d/rc.local   或者  /etc/rc.local （一般该文件指向/etc/rc.d/rc.local）
+
+2. 输入启动服务命令 如： rsync --daemon --config=/etc/rsyncd.conf
+						 service smb start

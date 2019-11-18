@@ -1,0 +1,366 @@
+
+init:
+
+clean:
+    [mkdir] Created dir: F:\文档\ant\Jdk\build
+
+unpack:
+    [unzip] Expanding: C:\Program Files\Java\jdk1.8.0_181\src.zip into F:\文档\ant\Jdk\build\src
+
+build:
+    [mkdir] Created dir: F:\文档\ant\Jdk\build\classes
+    [javac] F:\文档\ant\Jdk\build.xml:35: warning: 'includeantruntime' was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds
+    [javac] Compiling 7686 source files to F:\文档\ant\Jdk\build\classes
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\Class.java:57: 警告: Unsafe是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.Unsafe;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\Class.java:58: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.CallerSensitive;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\Class.java:59: 警告: ConstantPool是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.ConstantPool;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\Class.java:60: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.Reflection;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\Class.java:61: 警告: ReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.ReflectionFactory;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\Class.java:62: 警告: CoreReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.factory.CoreReflectionFactory;
+    [javac]                                    ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\Class.java:63: 警告: GenericsFactory是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.factory.GenericsFactory;
+    [javac]                                    ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\Class.java:64: 警告: ClassRepository是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.repository.ClassRepository;
+    [javac]                                       ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\Class.java:65: 警告: MethodRepository是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.repository.MethodRepository;
+    [javac]                                       ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\Class.java:66: 警告: ConstructorRepository是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.repository.ConstructorRepository;
+    [javac]                                       ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\Class.java:67: 警告: ClassScope是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.scope.ClassScope;
+    [javac]                                  ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\Class.java:68: 警告: SecurityConstants是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.security.util.SecurityConstants;
+    [javac]                         ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\AnnotatedElement.java:37: 警告: AnnotationSupport是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.annotation.AnnotationSupport;
+    [javac]                              ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\AnnotatedElement.java:38: 警告: AnnotationType是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.annotation.AnnotationType;
+    [javac]                              ^
+    [javac] F:\文档\ant\Jdk\build\src\java\io\ObjectStreamField.java:29: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.CallerSensitive;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\io\ObjectStreamField.java:30: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.Reflection;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\nio\charset\Charset.java:44: 警告: ASCIICaseInsensitiveComparator是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.ASCIICaseInsensitiveComparator;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\nio\charset\Charset.java:45: 警告: StandardCharsets是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.nio.cs.StandardCharsets;
+    [javac]                  ^
+    [javac] F:\文档\ant\Jdk\build\src\java\nio\charset\Charset.java:46: 警告: ThreadLocalCoders是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.nio.cs.ThreadLocalCoders;
+    [javac]                  ^
+    [javac] F:\文档\ant\Jdk\build\src\java\nio\charset\Charset.java:47: 警告: GetPropertyAction是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.security.action.GetPropertyAction;
+    [javac]                           ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\AbstractStringBuilder.java:28: 警告: FloatingDecimal是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.FloatingDecimal;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\util\Locale.java:52: 警告: GetPropertyAction是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.security.action.GetPropertyAction;
+    [javac]                           ^
+    [javac] F:\文档\ant\Jdk\build\src\java\util\Locale.java:53: 警告: BaseLocale是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.util.locale.BaseLocale;
+    [javac]                       ^
+    [javac] F:\文档\ant\Jdk\build\src\java\util\Locale.java:54: 警告: InternalLocaleBuilder是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.util.locale.InternalLocaleBuilder;
+    [javac]                       ^
+    [javac] F:\文档\ant\Jdk\build\src\java\util\Locale.java:55: 警告: LanguageTag是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.util.locale.LanguageTag;
+    [javac]                       ^
+    [javac] F:\文档\ant\Jdk\build\src\java\util\Locale.java:56: 警告: LocaleExtensions是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.util.locale.LocaleExtensions;
+    [javac]                       ^
+    [javac] F:\文档\ant\Jdk\build\src\java\util\Locale.java:57: 警告: LocaleMatcher是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.util.locale.LocaleMatcher;
+    [javac]                       ^
+    [javac] F:\文档\ant\Jdk\build\src\java\util\Locale.java:58: 警告: LocaleObjectCache是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.util.locale.LocaleObjectCache;
+    [javac]                       ^
+    [javac] F:\文档\ant\Jdk\build\src\java\util\Locale.java:59: 警告: LocaleSyntaxException是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.util.locale.LocaleSyntaxException;
+    [javac]                       ^
+    [javac] F:\文档\ant\Jdk\build\src\java\util\Locale.java:60: 警告: LocaleUtils是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.util.locale.LocaleUtils;
+    [javac]                       ^
+    [javac] F:\文档\ant\Jdk\build\src\java\util\Locale.java:61: 警告: ParseStatus是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.util.locale.ParseStatus;
+    [javac]                       ^
+    [javac] F:\文档\ant\Jdk\build\src\java\io\ObjectStreamClass.java:56: 警告: JavaSecurityAccess是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.JavaSecurityAccess;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\io\ObjectStreamClass.java:57: 警告: SharedSecrets是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.SharedSecrets;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\io\ObjectStreamClass.java:58: 警告: Unsafe是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.Unsafe;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\io\ObjectStreamClass.java:59: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.CallerSensitive;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\io\ObjectStreamClass.java:60: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.Reflection;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\io\ObjectStreamClass.java:61: 警告: ReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.ReflectionFactory;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\io\ObjectInputStream.java:46: 警告: SharedSecrets是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.SharedSecrets;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\io\ObjectInputStream.java:47: 警告: ObjectInputFilter是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.ObjectInputFilter;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\io\ObjectInputStream.java:48: 警告: ObjectStreamClassValidator是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.ObjectStreamClassValidator;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\io\ObjectInputStream.java:49: 警告: SharedSecrets是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.SharedSecrets;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\io\ObjectInputStream.java:51: 警告: JavaOISAccess是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.JavaOISAccess;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\ClassLoader.java:54: 警告: CompoundEnumeration是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.CompoundEnumeration;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\ClassLoader.java:55: 警告: Resource是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.Resource;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\ClassLoader.java:56: 警告: URLClassPath是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.URLClassPath;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\ClassLoader.java:57: 警告: VM是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.VM;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\ClassLoader.java:58: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.CallerSensitive;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\ClassLoader.java:59: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.Reflection;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\ClassLoader.java:61: 警告: SecurityConstants是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.security.util.SecurityConstants;
+    [javac]                         ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Constructor.java:28: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.CallerSensitive;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Constructor.java:29: 警告: ConstructorAccessor是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.ConstructorAccessor;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Constructor.java:30: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.Reflection;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Constructor.java:31: 警告: TypeAnnotation是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.annotation.TypeAnnotation;
+    [javac]                              ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Constructor.java:32: 警告: TypeAnnotationParser是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.annotation.TypeAnnotationParser;
+    [javac]                              ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Constructor.java:33: 警告: ConstructorRepository是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.repository.ConstructorRepository;
+    [javac]                                       ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Constructor.java:34: 警告: CoreReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.factory.CoreReflectionFactory;
+    [javac]                                    ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Constructor.java:35: 警告: GenericsFactory是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.factory.GenericsFactory;
+    [javac]                                    ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Constructor.java:36: 警告: ConstructorScope是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.scope.ConstructorScope;
+    [javac]                                  ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Executable.java:31: 警告: AnnotationParser是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.annotation.AnnotationParser;
+    [javac]                              ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Executable.java:32: 警告: AnnotationSupport是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.annotation.AnnotationSupport;
+    [javac]                              ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Executable.java:33: 警告: TypeAnnotationParser是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.annotation.TypeAnnotationParser;
+    [javac]                              ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Executable.java:34: 警告: TypeAnnotation是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.annotation.TypeAnnotation;
+    [javac]                              ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Executable.java:35: 警告: ConstructorRepository是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.repository.ConstructorRepository;
+    [javac]                                       ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\AccessibleObject.java:29: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.Reflection;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\AccessibleObject.java:30: 警告: ReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.ReflectionFactory;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\util\jar\Attributes.java:39: 警告: ASCIICaseInsensitiveComparator是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.ASCIICaseInsensitiveComparator;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\Package.java:51: 警告: ParseUtil是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.net.www.ParseUtil;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\Package.java:52: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.CallerSensitive;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\Package.java:53: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.Reflection;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Method.java:28: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.CallerSensitive;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Method.java:29: 警告: MethodAccessor是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.MethodAccessor;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Method.java:30: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.Reflection;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Method.java:31: 警告: MethodRepository是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.repository.MethodRepository;
+    [javac]                                       ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Method.java:32: 警告: CoreReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.factory.CoreReflectionFactory;
+    [javac]                                    ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Method.java:33: 警告: GenericsFactory是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.factory.GenericsFactory;
+    [javac]                                    ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Method.java:34: 警告: MethodScope是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.scope.MethodScope;
+    [javac]                                  ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Method.java:35: 警告: AnnotationType是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.annotation.AnnotationType;
+    [javac]                              ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Method.java:36: 警告: AnnotationParser是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.annotation.AnnotationParser;
+    [javac]                              ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Field.java:28: 警告: CallerSensitive是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.CallerSensitive;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Field.java:29: 警告: FieldAccessor是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.FieldAccessor;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Field.java:30: 警告: Reflection是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.Reflection;
+    [javac]                   ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Field.java:31: 警告: FieldRepository是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.repository.FieldRepository;
+    [javac]                                       ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Field.java:32: 警告: CoreReflectionFactory是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.factory.CoreReflectionFactory;
+    [javac]                                    ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Field.java:33: 警告: GenericsFactory是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.factory.GenericsFactory;
+    [javac]                                    ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Field.java:34: 警告: ClassScope是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.generics.scope.ClassScope;
+    [javac]                                  ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Field.java:38: 警告: AnnotationParser是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.annotation.AnnotationParser;
+    [javac]                              ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Field.java:39: 警告: AnnotationSupport是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.annotation.AnnotationSupport;
+    [javac]                              ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Field.java:40: 警告: TypeAnnotation是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.annotation.TypeAnnotation;
+    [javac]                              ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\reflect\Field.java:41: 警告: TypeAnnotationParser是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.reflect.annotation.TypeAnnotationParser;
+    [javac]                              ^
+    [javac] F:\文档\ant\Jdk\build\src\java\net\URL.java:36: 警告: SecurityConstants是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.security.util.SecurityConstants;
+    [javac]                         ^
+    [javac] F:\文档\ant\Jdk\build\src\java\security\ProtectionDomain.java:34: 警告: JavaSecurityAccess是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.JavaSecurityAccess;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\security\ProtectionDomain.java:35: 警告: JavaSecurityProtectionDomainAccess是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.JavaSecurityProtectionDomainAccess;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\security\ProtectionDomain.java:36: 警告: JavaSecurityProtectionDomainAccess是内部专用 API, 可能会在未来发行版中删除
+    [javac] import static sun.misc.JavaSecurityProtectionDomainAccess.ProtectionDomainCache;
+    [javac]                       ^
+    [javac] F:\文档\ant\Jdk\build\src\java\security\ProtectionDomain.java:37: 警告: SharedSecrets是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.SharedSecrets;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\security\ProtectionDomain.java:38: 警告: Debug是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.security.util.Debug;
+    [javac]                         ^
+    [javac] F:\文档\ant\Jdk\build\src\java\security\ProtectionDomain.java:39: 警告: SecurityConstants是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.security.util.SecurityConstants;
+    [javac]                         ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\ref\Reference.java:28: 警告: Cleaner是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.Cleaner;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\ref\Reference.java:29: 警告: JavaLangRefAccess是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.JavaLangRefAccess;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\ref\Reference.java:30: 警告: SharedSecrets是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.SharedSecrets;
+    [javac]                ^
+    [javac] F:\文档\ant\Jdk\build\src\java\lang\Double.java:28: 警告: FloatingDecimal是内部专用 API, 可能会在未来发行版中删除
+    [javac] import sun.misc.FloatingDecimal;
+    [javac]                ^
+    [javac] 注: 某些输入文件使用或覆盖了已过时的 API。
+    [javac] 注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+    [javac] 注: 某些输入文件使用了未经检查或不安全的操作。
+    [javac] 注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+    [javac] 100 个警告
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\javax\lang\model\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\time\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\javax\security\sasl\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\javax\security\cert\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\nio\file\attribute\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\javax\security\auth\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\time\zone\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\util\concurrent\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\lang\annotation\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\lang\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\javax\lang\model\element\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\util\concurrent\atomic\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\javax\lang\model\type\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\javax\tools\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\util\stream\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\lang\invoke\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\math\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\security\spec\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\time\temporal\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\javax\annotation\processing\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\security\cert\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\javax\xml\ws\spi\http\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\javax\security\auth\spi\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\nio\file\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\time\chrono\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\javax\security\auth\callback\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\javax\lang\model\util\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\javax\security\auth\x500\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\lang\reflect\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\javax\security\auth\kerberos\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\time\format\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\net\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\util\concurrent\locks\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\security\interfaces\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\javax\security\auth\login\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\nio\file\spi\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\security\acl\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\nio\channels\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\security\package-info.class
+    [javac] Creating empty F:\文档\ant\Jdk\build\classes\java\util\function\package-info.class
+
+makejar:
+    [mkdir] Created dir: F:\文档\ant\Jdk\build\dist
+     [copy] Copying 1 file to F:\文档\ant\Jdk\build\dist
+      [jar] Updating jar: F:\文档\ant\Jdk\build\dist\rt_debug.jar
+
+BUILD SUCCESSFUL
+Total time: 2 minutes 16 seconds

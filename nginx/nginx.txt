@@ -1,0 +1,29 @@
+1. 确定环境： yum -y install gcc automake autoconf libtool make
+
+2. 安装gc++： yum install gcc gcc-c++
+
+3.安装PCRE库： tar --> ./configure --> make & make install
+
+4.安装zlib库
+
+5.安装openssl（某些vps默认没装ssl)
+
+6.安装nginx
+
+
+
+nginx -h #帮助  
+
+nginx -v #显示版本  
+
+nginx -V #显示版本和配置信息  
+
+nginx -t #测试配置  
+
+nginx -q #测试配置时，只输出错误信息  
+
+nginx -s stop #停止服务器  
+
+nginx -s reload #重新加载配置 
+
+/usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf #启动
