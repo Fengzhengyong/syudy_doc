@@ -28,8 +28,8 @@
 这里又分为两种情况：
 
 如果是正常的用户线程，则通过该线程的堆栈信息查看其具体是在哪处用户代码处运行比较消耗 CPU。
-如果该线程是 VM Thread，则通过 jstat -gcutil 命令监控当前系统的 GC 状况。
-然后通过 jmap dump:format=b,file=order.dump 导出系统当前的内存数据。
+如果该线程是 VM Thread，则通过 jstat -gcutil pid 命令监控当前系统的 GC 状况。
+然后通过 jmap dump:format=b,file=order.dump pid  导出系统当前的内存数据。( 会暂停应用， 线上系统慎用 )
 
 导出之后将内存情况放到 Eclipse 的 Mat 工具中进行分析即可得出内存中主要是什么对象比较消耗内存，进而可以处理相关代码。
 
@@ -45,16 +45,72 @@
 
 本文主要是提出了五种常见的导致线上功能缓慢的问题，以及排查思路。当然，线上的问题出现的形式是多种多样的，也不一定局限于这几种情况。
 
+#### gstat 命令
+
+- 类加载统计：jstat  -class 10664
+- 编译统计：jstat -compiler 10664
+- 垃圾回收统计：jstat -gc 10664
+- 堆内存统计：jstat -gccapacity 10664
+- 新生代垃圾回收统计：jstat -gcnew 10664
+- 新生代内存统计：jstat -gcnewcapacity 10664
+- 老年代垃圾回收统计：jstat -gcold 10664
+- 老年代内存统计：jstat -gcoldcapacity 10664
+- 元数据空间统计：jstat -gcmetacapacity 10664
+- 总结垃圾回收统计：jstat -gcutil 10664
+- JVM编译方法统计：jstat -printcompilation 10664
+
+#### jmap 命令
+
+-  查看进程的内存映像信息 ：jmap pid
+-  显示Java堆详细信息 : jmap -heap pid
+-  显示堆中对象的统计信息 : jmap -histo:live pid
+-  打印类加载器信息 : jmap -clstats pid
+-  打印等待终结的对象信息 : jmap -finalizerinfo pid
+-  生成堆转储快照dump文件：jmap -dump:format=b,file=heapdump.phrof pid
 
 
-#### nmon 命令 – 性能监控
 
-```shell
-# wget http://sourceforge.net/projects/nmon/files/nmon_linux_14i.tar.gz
+#### 问题场景
 
-# tar zxvf nmon_linux_14i.tar.gz
+1. ##### JVM 堆内存溢出后，其他线程是否可继续工作？
 
-# chmod 777 nmon_x86_64_sles11
-```
+   ###### jvm中的内存溢出又分为很多种：
 
- 在运行界面上，输入 C 显示CPU信息，输入 M 显示内存信息，输入 N 显示网络信息，输入 D 显示硬盘 I/O 信息 
+   -  堆溢出（“java.lang.OutOfMemoryError: Java heap space”） 
+   -  方法区溢出（“java.lang.OutOfMemoryError:Permgen space”） 
+   -  栈溢出,不能创建线程（“java.lang.OutOfMemoryError:Unable to create new native thread”） 
+   - 直接内存溢出（“OutOfMemoryError”）
+
+   ###### 产生原因：
+
+   - 堆中存在大量对象无法被gc回收，可能是内存泄漏或者大对象过多
+   - 方法区存放类信息，当class越来越多时就会产生此问题
+   - 创建的线程多到栈不足以支撑时
+   - 分配过多内存给运行时数据区，导致直接内存使用到时不足
+
+   ###### 解决方法：
+
+   - 优化代码， 或使用 -Xms -Xmx等参数调整堆的大小 
+   -  使用-XX:PermSize参数调整方法区的大小 
+   -  使用-Xss参数调整栈的大小
+   - 使用-XX：MaxDirectMemorySize属性指定直接内存的大小 
+
+   综上所述，要根据不同情况来看。例如出现堆溢出时，则在报出OOM错误前一定进行了大量的gc，则会对所有线程都产生影响。当OOM时，则该线程会被jvm终结掉，则其所占有的资源都会被释放出来。
+
+   ###### 总结：
+
+   ​	**当堆栈等发生溢出时，其他线程依旧能够进行工作**，但是频繁的gc可能会对其他的线程产生无法预知的影响。
+
+   ###### 测试结果：
+
+   ​	![](E:\study_doc\syudy_doc\带着问题学习\test_result_pic\thread_oom.jpg)
+
+   堆大小为：-Xms16m -Xmx32m   线程数量2
+
+   ![](E:\study_doc\syudy_doc\带着问题学习\test_result_pic\head.png)
+
+   ![](E:\study_doc\syudy_doc\带着问题学习\test_result_pic\thread_dead.jpg)
+
+   当Thread-0报错OOM时，线程数量实时线程数量减一，堆空间释放
+
+2. 

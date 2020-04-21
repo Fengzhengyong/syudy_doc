@@ -1,0 +1,28 @@
+﻿一、vim /etc/sudoers
+
+修改内容具体如下：
+
+1、在文本中找到下语句
+
+root ALL=(ALL) ALL
+
+2、在其下面增加以下语句（user是普通用户名,改成你自己的!）
+
+kduser ALL=NOPASSWD:/usr/libexec/openssh/sftp-server
+
+
+3、然后向上找到下面语句，将其注释掉
+
+Defaults requiretty
+
+修改为
+
+#Defaults requiretty
+
+
+4、保存并退出
+
+二、打开winscp, 设置 sftp和shell
+sudo /usr/libexec/openssh/sftp-server
+
+sudu -i

@@ -1,8 +1,15 @@
 CentOS利用yum下载好rpm包，并离线安装
- 
+
 1、联网安装好rpm包，并将下载好的包备好
 #yum install --downloadonly --downloaddir=/home/samba  samba
 其中samba 是要用yum安装的安装包，/home/samba是要存放下载的yum安装包及其依赖包的保存路径
- 
+
 2、离线的机器上，在rpm所在的文件夹内，执行以下脚本
-#rpm -Uvh --force --nodeps *.rpm
+
+```
+rpm -Uvh --force --nodeps *.rpm
+或
+yum localinstall -y *.rpm
+```
+
+

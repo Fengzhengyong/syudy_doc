@@ -134,7 +134,9 @@ if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
 
 ------
 
-
+ `HashMap`的线程不安全主要体现在下面两个方面：
+1.在JDK1.7中，当并发执行扩容操作时会造成环形链和数据丢失的情况。
+2.在JDK1.8中，在并发执行put操作时会发生数据覆盖的情况。 
 
 ##### 5. HashMap和 HashTable有何不同？
 

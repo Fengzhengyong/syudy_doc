@@ -1,0 +1,41 @@
+
+fdisk -l
+ls /sys/class/scsi_host/
+echo "- - -" > /sys/class/scsi_host/host0/scan
+echo "- - -" > /sys/class/scsi_host/host1/scan
+echo "- - -" > /sys/class/scsi_host/host2/scan
+fdisk -l
+
+fdisk /dev/sdc
+
+n
+p
+1
+回车
+回车
+t
+l
+8e
+w
+
+pvcreate /dev/sdc1
+
+vgdisplay
+
+vgextend Vol /dev/sdc1
+
+lvdisplay
+
+lvextend -L +100G /dev/Vol/var
+
+resize2fs /dev/Vol/var
+
+xfs_info /dev/Vol/var
+
+xfs_growfs /dev/Vol/var
+
+lvextend -L +100G /dev/Vol/var
+
+xfs_info /dev/Vol/var
+
+xfs_growfs /dev/Vol/var
